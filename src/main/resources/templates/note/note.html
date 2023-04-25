@@ -7,18 +7,18 @@
 
 <div class="container mt-1">
 
-  <h2 th:text="${note.getId()==0} ? 'Створення замітки' : 'Редагування замітки'"></h2>
+  <h2 th:text="${note.getId()==0} ? 'Создание заметки' : 'Редактирование заметки'"></h2>
 
   <form action="/note/edit" method="post">
 
     <div class="form-group">
-      <label for="noteTitle">Header</label>
-      <input class="form-control" id="noteTitle" name="noteTitle" th:value="${note.getTitle()}">
+      <label for="title">Оглавление</label>
+      <input class="form-control" id="title" name="title" th:value="${note.getTitle()}">
     </div>
 
     <div class="form-group">
-      <label for="noteContent">Text</label>
-      <textarea class="form-control" id="noteContent" name="noteContent"
+      <label for="content">Текст заметки</label>
+      <textarea class="form-control" id="content" name="content"
              th:text="${note.getContent()}">
       </textarea>
     </div>
@@ -26,8 +26,8 @@
     <input type="hidden" name="id" th:value="${note.getId()}">
 
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="submit" class="btn btn-success mr-1">Save</button>
-      <a href="/note/list" class="btn btn-danger">Cancel</a>
+      <button type="submit" class="btn btn-success mr-1">Сохранить</button>
+      <a href="/note/list" class="btn btn-danger">Отмена</a>
     </div>
 
   </form>

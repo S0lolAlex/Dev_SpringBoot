@@ -10,12 +10,14 @@ import java.util.Map;
 @Service
 public class NoteService {
     private Map<Long, Note> listNote = new HashMap<>();
+    private long index = 0;
     public List<Note> listAll(){
         return new ArrayList<>(listNote.values());
     }
     public Note add(Note note){
+        note.setId(index++);
         listNote.put(note.getId(),note);
-        return listNote.get(note.getId());
+        return note;
     }
     public void deleteById(long id){
         try{listNote.remove(id);

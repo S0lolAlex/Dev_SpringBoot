@@ -6,6 +6,7 @@ import lombok.Data;
 
 
 @Data
+@Builder
 public class Note implements Comparable{
 
     private long id;
