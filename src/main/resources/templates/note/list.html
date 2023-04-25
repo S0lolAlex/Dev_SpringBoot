@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+
+<head th:insert="fragments/header.html"></head>
+
+<body>
+<div class="container mt-1">
+
+  <div><h2>Notes</h2></div>
+
+  <div class="alert alert-primary" role="alert">
+
+    <div class="row">
+      <div class="col-md-10">
+        <a href="/note/add" class="btn btn-primary">Create new Note</a>
+      </div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Settings
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/note/list" >notes</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card mt-1" th:each="note: ${notes}">
+    <div class="card-header text-uppercase font-weight-bold" th:text="${note.getTitle()}"></div>
+    <div class="card-body">
+
+      <p class="card-text" th:text="${note.getContent()}"></p>
+
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4 d-flex justify-content-end">
+          <div class="row ml-0 mr-0">
+
+            <form action="/note/edit" method="get" class="mr-1">
+              <input type="hidden" name="id" th:value="${note.getId()}">
+              <button type="submit" class="btn btn-warning">
+                <i class="material-icons mr-1">edit</i>
+              </button>
+            </form>
+
+              <form action="/note/delete" method="post">
+                <input type="hidden" name="id" th:value="${note.getId()}">
+                <button type="submit" class="btn btn-danger">
+                  <i class="material-icons mr-1">delete</i>
+                </button>
+              </form>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+
+
+</body>
+</html>

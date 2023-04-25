@@ -1,6 +1,6 @@
 package org.greenSnake.Service;
 
-import org.greenSnake.Data.Note;
+import org.greenSnake.entities.Note;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class NoteService {
     public void deleteById(long id){
         try{listNote.remove(id);
         }catch (NullPointerException e){
-            throw new NullPointerException("Note not found");
+            throw new NullPointerException("note not found");
         }
     }
     public void update(Note note){
@@ -29,14 +29,14 @@ public class NoteService {
             upNote.setTitle(note.getTitle());
             upNote.setContent(note.getContent());
         }else {
-            throw new NullPointerException("Note not found");
+            throw new NullPointerException("note not found");
         }
     }
     public Note getById(long id){
         Note note;
         try{note = listNote.get(id);
         }catch (NullPointerException e){
-            throw new NullPointerException("Note not found");
+            throw new NullPointerException("note not found");
         }
         return note;
     }

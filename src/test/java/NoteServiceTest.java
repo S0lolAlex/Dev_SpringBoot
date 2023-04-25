@@ -1,4 +1,4 @@
-import org.greenSnake.Data.Note;
+import org.greenSnake.entities.Note;
 import org.greenSnake.Service.NoteService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
