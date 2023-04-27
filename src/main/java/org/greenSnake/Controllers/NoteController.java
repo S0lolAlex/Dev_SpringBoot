@@ -24,9 +24,7 @@ public class NoteController {
     }
     @GetMapping("/add")
     public ModelAndView addNote() {
-        ModelAndView result = new ModelAndView("note/note");
-        result.addObject("note", service.add(Note.builder().build()));
-        return result;
+        return new ModelAndView("note/note");
     }
     @GetMapping("/edit")
     public ModelAndView editNote(@RequestParam(value = "id")long id){
@@ -39,7 +37,7 @@ public class NoteController {
                                      @RequestParam(value = "content")String content,
                                      @RequestParam(value = "title")String title){
 
-        if (service.getById(id) == null) {
+        if (id == -1) {
             Note note = Note.builder().title(title).content(content).build();;
             note.setTitle(title);
             note.setContent(content);

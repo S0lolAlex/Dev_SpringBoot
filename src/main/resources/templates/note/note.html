@@ -7,23 +7,23 @@
 
 <div class="container mt-1">
 
-  <h2 th:text="${note.getTitle() == null} ? 'Создание заметки' : 'Редактирование заметки'"></h2>
+  <h2 th:text="${note == null} ? 'Создание заметки' : 'Редактирование заметки'"></h2>
 
   <form action="/note/edit" method="post">
 
     <div class="form-group">
       <label for="title">Оглавление</label>
-      <input class="form-control" id="title" name="title" th:value="${note.getTitle()}">
+      <input class="form-control" id="title" name="title" th:value="${note == null ? '':note.getTitle()}">
     </div>
 
     <div class="form-group">
       <label for="content">Текст заметки</label>
       <textarea class="form-control" id="content" name="content"
-             th:text="${note.getContent()}">
+             th:text="${note == null ? '':note.getContent()}">
       </textarea>
     </div>
 
-    <input type="hidden" name="id" th:value="${note.getId()}">
+    <input type="hidden" name="id" th:value="${note == null ? -1 :note.getId()}">
 
     <div class="btn-group" role="group" aria-label="Basic example">
       <button type="submit" class="btn btn-success mr-1">Сохранить</button>
