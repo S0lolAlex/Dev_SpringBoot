@@ -15,9 +15,9 @@ public class NoteService {
         return new ArrayList<>(listNote.values());
     }
     public Note add(Note note){
-        note.setId(index++);
-        listNote.put(note.getId(),note);
-        return note;
+            note.setId(index++);
+            listNote.put(note.getId(),note);
+            return listNote.get(note.getId());
     }
     public void deleteById(long id){
         try{listNote.remove(id);
@@ -34,13 +34,7 @@ public class NoteService {
             throw new NullPointerException("note not found");
         }
     }
-    public Note getById(long id){
-        Note note;
-        try{note = listNote.get(id);
-        }catch (NullPointerException e){
-            throw new NullPointerException("note not found");
-        }
-        return note;
+    public Note getById(long id) {
+        return listNote.getOrDefault(id, null);
     }
-
 }

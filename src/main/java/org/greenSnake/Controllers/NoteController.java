@@ -25,8 +25,7 @@ public class NoteController {
     @GetMapping("/add")
     public ModelAndView addNote() {
         ModelAndView result = new ModelAndView("note/note");
-        Note note = Note.builder().build();
-        result.addObject("note", service.add(note));
+        result.addObject("note", service.add(Note.builder().build()));
         return result;
     }
     @GetMapping("/edit")
@@ -39,15 +38,14 @@ public class NoteController {
     public RedirectView editNoteView(@RequestParam(value = "id")long id,
                                      @RequestParam(value = "content")String content,
                                      @RequestParam(value = "title")String title){
-        Note note = null;
-        if (id == 0) {
-            note = Note.builder().title(title).content(content).build();
-            note.setId(id);
+
+        if (service.getById(id) == null) {
+            Note note = Note.builder().title(title).content(content).build();;
             note.setTitle(title);
             note.setContent(content);
             service.add(note);
         } else {
-            note = service.getById(id);
+            Note note = service.getById(id);
             note.setTitle(title);
             note.setContent(content);
             service.update(note);

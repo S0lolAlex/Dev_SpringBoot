@@ -7,7 +7,7 @@
 
 <div class="container mt-1">
 
-  <h2 th:text="${note.getId()==0} ? 'Создание заметки' : 'Редактирование заметки'"></h2>
+  <h2 th:text="${note.getTitle() == null} ? 'Создание заметки' : 'Редактирование заметки'"></h2>
 
   <form action="/note/edit" method="post">
 

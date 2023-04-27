@@ -26,10 +26,8 @@ public class NoteServiceTest {
 
     @Test
     public void testCorrectAdd(){
-        Note note = new Note();
-        note.setContent("testContent");
-        note.setTitle("Title");
-        Assertions.assertEquals(note,service.add(note));
+        Note note = Note.builder().title("Title").content("testContent").build();
+        Assertions.assertEquals(note.getId(),service.add(note).getId());
     }
     @Test
     public void testThatGetByIdCorrect(){
