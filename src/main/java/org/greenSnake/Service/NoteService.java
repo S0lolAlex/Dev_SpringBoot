@@ -1,40 +1,28 @@
 package org.greenSnake.Service;
 
+import lombok.RequiredArgsConstructor;
 import org.greenSnake.entities.Note;
+import org.greenSnake.repository.NoteRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+@RequiredArgsConstructor
 @Service
 public class NoteService {
-    private Map<Long, Note> listNote = new HashMap<>();
-    private long index = 0;
+    private final NoteRepository repository;
     public List<Note> listAll(){
-        return new ArrayList<>(listNote.values());
+        return repository.findAll();
     }
     public Note add(Note note){
-            note.setId(index++);
-            listNote.put(note.getId(),note);
-            return listNote.get(note.getId());
+            return repository.save(note);
     }
     public void deleteById(long id){
-        try{listNote.remove(id);
-        }catch (NullPointerException e){
-            throw new NullPointerException("note not found");
-        }
+            repository.deleteById(id);
     }
     public void update(Note note){
-        if(listNote.containsKey(note.getId())){
-            Note upNote = listNote.get(note.getId());
-            upNote.setTitle(note.getTitle());
-            upNote.setContent(note.getContent());
-        }else {
-            throw new NullPointerException("note not found");
-        }
+            repository.saveAndFlush(note);
     }
     public Note getById(long id) {
-        return listNote.getOrDefault(id, null);
+        return repository.findById(id).orElse(null);
     }
 }

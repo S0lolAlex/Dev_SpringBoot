@@ -3,6 +3,7 @@ package org.greenSnake.Controllers;
 import lombok.RequiredArgsConstructor;
 import org.greenSnake.Service.NoteService;
 import org.greenSnake.entities.Note;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,30 +16,36 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/note")
 @RequiredArgsConstructor
 public class NoteController {
-    private final NoteService service = new NoteService();
+    private final NoteService service;
+
     @GetMapping("/list")
-    public ModelAndView getAllNotes(){
+    public ModelAndView getAllNotes() {
         ModelAndView result = new ModelAndView("note/list");
         result.addObject("notes", service.listAll());
         return result;
     }
+
     @GetMapping("/add")
     public ModelAndView addNote() {
-        return new ModelAndView("note/note");
+        ModelAndView result = new ModelAndView("note/note");
+        result.addObject("note", service.add(new Note()));
+        return result;
+
     }
+
     @GetMapping("/edit")
-    public ModelAndView editNote(@RequestParam(value = "id")long id){
+    public ModelAndView editNote(@RequestParam(value = "id") long id) {
         ModelAndView result = new ModelAndView("note/note");
         result.addObject("note", service.getById(id));
         return result;
     }
-    @PostMapping("/edit")
-    public RedirectView editNoteView(@RequestParam(value = "id")long id,
-                                     @RequestParam(value = "content")String content,
-                                     @RequestParam(value = "title")String title){
 
+    @PostMapping("/edit")
+    public RedirectView editNoteView(@RequestParam(value = "id") long id,
+                                     @RequestParam(value = "content") String content,
+                                     @RequestParam(value = "title") String title) {
         if (id == -1) {
-            Note note = Note.builder().title(title).content(content).build();;
+            Note note = new Note();
             note.setTitle(title);
             note.setContent(content);
             service.add(note);
@@ -52,7 +59,7 @@ public class NoteController {
     }
 
     @PostMapping("/delete")
-    public RedirectView deleteNoteById(@RequestParam(value = "id")long id){
+    public RedirectView deleteNoteById(@RequestParam(value = "id") long id) {
         service.deleteById(id);
         return new RedirectView("/note/list");
     }
