@@ -6,14 +6,24 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class Note{
+public class Note implements Comparable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
     private String title;
-    @Column
     private String content;
 
+    @Override
+    public int compareTo(Object o) {
+        if (!(o instanceof Note)){
+            return -1;
+        }
+
+        Note note = (Note) o;
+        if (note.getTitle().equals(getTitle()) && note.getContent().equals(getContent())){
+            return 0;
+        }
+        return -1;
+    }
 }

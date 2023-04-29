@@ -3,6 +3,7 @@ package org.greenSnake.Controllers;
 import lombok.RequiredArgsConstructor;
 import org.greenSnake.Service.NoteService;
 import org.greenSnake.entities.Note;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping("/note")
 public class NoteController {
-
+    @Autowired
     private final NoteService service;
 
     @GetMapping("/list")
