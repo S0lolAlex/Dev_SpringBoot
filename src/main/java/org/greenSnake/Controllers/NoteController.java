@@ -27,10 +27,7 @@ public class NoteController {
 
     @GetMapping("/add")
     public ModelAndView addNote() {
-        ModelAndView result = new ModelAndView("note/note");
-        result.addObject("note", service.add(new Note()));
-        return result;
-
+        return new ModelAndView("note/note");
     }
 
     @GetMapping("/edit")
