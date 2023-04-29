@@ -1,7 +1,6 @@
 package org.greenSnake.Service;
 
 import org.greenSnake.entities.Note;
-import org.greenSnake.Service.NoteService;
 import org.greenSnake.repository.NoteRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,10 +8,11 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.context.annotation.ComponentScan;
+
 
 @SpringBootTest
-@TestPropertySource("classpath:test.properties")
+@ComponentScan("org.greenSnake")
 public class NoteServiceTest {
     NoteService service;
     @Autowired
