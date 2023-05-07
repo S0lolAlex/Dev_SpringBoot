@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+
+<head th:insert="fragments/header.html"></head>
+<meta charset="UTF-8">
+<body>
+<div class="container mt-1">
+
+  <div><h2>Пользователи</h2></div>
+
+  <div class="alert alert-primary" role="alert">
+
+    <div class="row">
+      <div class="col-md-10">
+        <a href="/users/add" class="btn btn-primary" sec:authorize="hasRole('ADMIN_ROLE')">Добавить пользователя</a>
+      </div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Меню
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/users/list" >Пользователи</a>
+          </div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/note/list" sec:authorize="hasRole('ADMIN_ROLE')">Заметки</a>
+            <a class="dropdown-item" href="@{logout}">Выход</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card mt-1" th:each="user: ${user}">
+    <div class="card-header text-uppercase font-weight-bold" th:text="${user.getUsername()}"></div>
+    <div class="card-body">
+
+      <p class="card-text" th:text="${user.getRole()}"></p>
+
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4 d-flex justify-content-end">
+          <div class="row ml-0 mr-0">
+
+            <form action="/users/edit" method="get" class="mr-1" sec:authorize="hasRole('ADMIN_ROLE')">
+              <input type="hidden" name="id" th:value="${users.getId()}">
+              <button type="submit" class="btn btn-warning">
+                <i class="material-icons mr-1">изменить</i>
+              </button>
+            </form>
+
+              <form action="/users/delete" method="post" sec:authorize="hasRole('ADMIN_ROLE')">
+                <input type="hidden" name="id" th:value="${users.getId()}">
+                <button type="submit" class="btn btn-danger">
+                  <i class="material-icons mr-1">удалить</i>
+                </button>
+              </form>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+
+
+</body>
+</html>
