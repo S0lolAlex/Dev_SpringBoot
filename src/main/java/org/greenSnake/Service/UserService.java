@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService{
     @Autowired
     private UsersRepository repository;
 
@@ -27,6 +27,9 @@ public class UserService {
     }
     public Users getById(int id){
         return repository.findById(id).orElse(null);
+    }
+    public Users getByName(String name){
+        return repository.findByName(name);
     }
     public void update(Users user){
         repository.saveAndFlush(user);

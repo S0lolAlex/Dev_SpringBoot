@@ -40,7 +40,7 @@ public class UserController {
                                      @RequestParam(value = "password") String password,
                                      @RequestParam(value = "role")UsersRoles role) {
         if (id == -1) {
-            Users user = new Users(id,username,password,role);
+            Users user = new Users(username,password,role);
             service.add(user);
         } else {
             Users user = service.getById(id);

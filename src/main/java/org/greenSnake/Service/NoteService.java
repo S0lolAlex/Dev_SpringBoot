@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class NoteService {
     @Autowired
-    private final NoteRepository repository;
+    private NoteRepository repository;
     public List<Note> listAll(){
         return repository.findAll();
     }
