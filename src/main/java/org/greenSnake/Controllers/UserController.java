@@ -29,13 +29,13 @@ public class UserController {
         return new ModelAndView("users/note");
     }
     @GetMapping("/edit")
-    public ModelAndView editNote(@RequestParam(value = "id") int id) {
+    public ModelAndView editNote(@RequestParam(value = "id") Long id) {
         ModelAndView result = new ModelAndView("users/note");
         result.addObject("user", service.getById(id));
         return result;
     }
     @PostMapping("/edit")
-    public RedirectView editNoteView(@RequestParam(value = "id") int id,
+    public RedirectView editNoteView(@RequestParam(value = "id") Long id,
                                      @RequestParam(value = "username") String username,
                                      @RequestParam(value = "password") String password,
                                      @RequestParam(value = "role")UsersRoles role) {
@@ -52,7 +52,7 @@ public class UserController {
         return new RedirectView("/users/list");
     }
     @PostMapping("/delete")
-    public RedirectView deleteNoteById(@RequestParam(value = "id") int id) {
+    public RedirectView deleteNoteById(@RequestParam(value = "id") Long id) {
         service.deleteById(id);
         return new RedirectView("/users/list");
     }

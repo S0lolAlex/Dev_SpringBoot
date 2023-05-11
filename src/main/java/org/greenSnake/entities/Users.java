@@ -20,7 +20,6 @@ public class Users {
     @NonNull
     @Enumerated(EnumType.STRING)
     private UsersRoles role;
-    @Nullable
     private int enabled;
 
     public Users(@NonNull String username, @NonNull String password, @NonNull UsersRoles role) {

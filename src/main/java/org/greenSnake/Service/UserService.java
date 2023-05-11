@@ -22,10 +22,10 @@ public class UserService{
         return repository.save(user);
     }
 
-    public void deleteById(int id){
+    public void deleteById(Long id){
         repository.deleteById(id);
     }
-    public Users getById(int id){
+    public Users getById(Long id){
         return repository.findById(id).orElse(null);
     }
     public Users getByName(String name){

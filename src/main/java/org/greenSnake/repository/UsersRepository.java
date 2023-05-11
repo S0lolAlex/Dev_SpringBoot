@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users,Integer> {
-    @Query(nativeQuery = true, value = "SELECT * FROM users u WHERE u.username = :name")
+public interface UsersRepository extends JpaRepository<Users,Long> {
+    @Query(nativeQuery = true, value = "SELECT * FROM users WHERE users.username = :name")
     Users findByName(String name);
 }
