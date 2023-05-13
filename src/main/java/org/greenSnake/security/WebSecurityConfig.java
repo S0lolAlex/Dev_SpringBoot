@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+
 import javax.sql.DataSource;
 
 
@@ -22,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-                .passwordEncoder(new BCryptPasswordEncoder())
+                .passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from users where username=?")
                 .authoritiesByUsernameQuery("select username, role from users where username=?");

@@ -21,10 +21,12 @@ public class Users {
     @Enumerated(EnumType.STRING)
     private UsersRoles role;
     private int enabled;
+    public Users(){}
 
-    public Users(@NonNull String username, @NonNull String password, @NonNull UsersRoles role) {
+    public Users(@NonNull String username, @NonNull String password, @NonNull UsersRoles role, int enabled) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.enabled = enabled;
     }
 }

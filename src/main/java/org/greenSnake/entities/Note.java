@@ -26,4 +26,5 @@ public class Note implements Comparable{
         }
         return -1;
     }
+
 }
