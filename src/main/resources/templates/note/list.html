@@ -21,7 +21,7 @@
             Меню заметок
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/users/list" sec:authorize="hasRole('ADMIN')">Пользователи</a>
+            <a class="dropdown-item" href="/users/list" sec:authorize="hasRole('ROLE_ADMIN')">Пользователи</a>
             <a class="dropdown-item" href="/note/list" >Заметки</a>
             <a class="dropdown-item" th:href="@{/logout}">Выход</a>
           </div>

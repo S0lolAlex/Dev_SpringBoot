@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.greenSnake.entities.Note;
 import org.greenSnake.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="fragments/header.html"></head>
 <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="col-md-10">
-                <a href="/users/add" class="btn btn-primary">Добавить пользователя</a>
+                <a href="/users/add" class="btn btn-primary" sec:authorized="hasRole('ROLE_ADMIN')">Добавить пользователя</a>
             </div>
             <div class="col-md-2">
                 <div class="dropdown">
@@ -35,9 +35,9 @@
         <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Ім'я</th>
+            <th scope="col">Имя</th>
             <th scope="col">Роль</th>
-            <th scope="col">Активність</th>
+            <th scope="col">Валидность</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -45,12 +45,12 @@
         <tr th:each="user: ${users}"
             th:classappend="${user.getEnabled()==0} ? 'bg-secondary text-white' : 'bg-white text-dark'">
             <th scope="row" th:text="${user.getId()}"></th>
-            <th th:text="${user.getRole().getRole()}"></th>
-            <td th:text="${user.getUsername()}"></td>
+            <th th:text="${user.getUsername()}"></th>
+            <td th:text="${user.getRole().getRole()}"></td>
             <td>
                 <div th:switch="${user.getEnabled()}">
-                    <p th:case="1">Активний</p>
-                    <p th:case="0">Не активний</p>
+                    <p th:case="1">Валидный</p>
+                    <p th:case="0">Не валидный</p>
                 </div>
             </td>
             <td>
@@ -59,14 +59,14 @@
                     <form action="/users/edit" method="get" class="mr-1">
                         <input type="hidden" name="id" th:value="${user.getId()}">
                         <button type="submit" class="btn btn-warning">
-                            <i class="material-icons mr-1">edit</i>
+                            <i class="material-icons mr-1">изменить</i>
                         </button>
                     </form>
 
                     <form action="/users/delete" method="post">
                         <input type="hidden" name="id" th:value="${user.getId()}">
                         <button type="submit" class="btn btn-danger">
-                            <i class="material-icons mr-1">delete</i>
+                            <i class="material-icons mr-1">удалить</i>
                         </button>
                     </form>
                 </div>
