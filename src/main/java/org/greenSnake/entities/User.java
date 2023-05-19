@@ -2,6 +2,7 @@ package org.greenSnake.entities;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.greenSnake.dto.UserDto;
 import org.greenSnake.enums.UsersRoles;
 import org.springframework.lang.NonNull;
@@ -9,21 +10,21 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "users")
 @Data
-@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
+    @Nullable
     private String username;
-    @NonNull
+    @Nullable
     private String password;
-    @NonNull
+    @Nullable
     @Enumerated(EnumType.STRING)
     private UsersRoles role;
-    private int enabled;
+    private Integer enabled;
+
     public UserDto toUserDto(){
         UserDto userDto = UserDto.builder()
                 .id(getId())

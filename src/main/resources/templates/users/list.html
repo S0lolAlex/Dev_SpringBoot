@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="col-md-10">
-                <a href="/users/add" class="btn btn-primary" sec:authorized="hasRole('ROLE_ADMIN')">Добавить пользователя</a>
+                <a href="/users/add" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">Добавить пользователя</a>
             </div>
             <div class="col-md-2">
                 <div class="dropdown">
@@ -21,7 +21,7 @@
                         Меню
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/note/list">Заметки</a>
+                        <a class="dropdown-item" href="/note/list" >Заметки</a>
                         <a class="dropdown-item" th:href="@{/logout}">Выход</a>
                     </div>
                 </div>

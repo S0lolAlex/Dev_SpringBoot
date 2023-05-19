@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" >
 
 <head th:insert="fragments/header.html"></head>
 
@@ -11,8 +11,9 @@
   <div class="alert alert-primary" role="alert">
 
     <div class="row">
-      <div class="col-md-10">
-        <a href="/note/add" class="btn btn-primary">Создать заметку</a>
+      <div class="col-md-10" >
+        <a href="/note/add" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">Создать заметку</a>
+<!--        <a href="/note/add" class="btn btn-primary" th:if="${#authorization.hasRole('ROLE_ADMIN')}">Создать заметку</a>-->
       </div>
       <div class="col-md-2">
         <div class="dropdown">
@@ -22,7 +23,6 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="/users/list" sec:authorize="hasRole('ROLE_ADMIN')">Пользователи</a>
-            <a class="dropdown-item" href="/note/list" >Заметки</a>
             <a class="dropdown-item" th:href="@{/logout}">Выход</a>
           </div>
         </div>
