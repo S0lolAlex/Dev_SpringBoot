@@ -21,7 +21,7 @@
                         Меню
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/note/list" >Заметки</a>
+                        <a class="dropdown-item" href="/note/list" sec:authorize="hasRole('ROLE_ADMIN')">Заметки</a>
                         <a class="dropdown-item" th:href="@{/logout}">Выход</a>
                     </div>
                 </div>
@@ -38,7 +38,6 @@
             <th scope="col">Имя</th>
             <th scope="col">Роль</th>
             <th scope="col">Валидность</th>
-            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -56,17 +55,17 @@
             <td>
 
                 <div class="d-flex justify-content-end">
-                    <form action="/users/edit" method="get" class="mr-1">
+                    <form action="/users/edit" method="get" class="mr-1" sec:authorize="hasRole('ROLE_ADMIN')">
                         <input type="hidden" name="id" th:value="${user.getId()}">
                         <button type="submit" class="btn btn-warning">
-                            <i class="material-icons mr-1">изменить</i>
+                            <i style="width: 80px; height:50px" class="a1">изменить</i>
                         </button>
                     </form>
 
-                    <form action="/users/delete" method="post">
+                    <form action="/users/delete" method="post" sec:authorize="hasRole('ROLE_ADMIN')">
                         <input type="hidden" name="id" th:value="${user.getId()}">
                         <button type="submit" class="btn btn-danger">
-                            <i class="material-icons mr-1">удалить</i>
+                            <i style="width: 80px; height:50px" class="a1">удалить</i>
                         </button>
                     </form>
                 </div>

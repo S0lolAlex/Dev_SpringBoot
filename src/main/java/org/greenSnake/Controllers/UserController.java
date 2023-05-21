@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping("/users")
@@ -30,7 +33,10 @@ public class UserController {
 
     @GetMapping("/add")
     public ModelAndView addUser() {
-        return new ModelAndView("users/user");
+        ModelAndView modelAndView = new ModelAndView("users/user");
+        UserDto user = UserDto.builder().build();
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 
     @GetMapping("/edit")
@@ -50,13 +56,13 @@ public class UserController {
                                      @RequestParam(value = "enabled", required = false) String enabled,
                                      @RequestParam(value = "role") String role) {
         User user = null;
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String hashedPassword = passwordEncoder.encode(password);
-        UsersRoles userRole = "Admin".equals(role) ? UsersRoles.ROLE_ADMIN : UsersRoles.ROLE_USER;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodePassword = passwordEncoder.encode(password);
+        UsersRoles userRole = "ADMIN".equals(role) ? UsersRoles.ROLE_ADMIN : UsersRoles.ROLE_USER;
         if (id == -1) {
             user = new User();
             user.setUsername(username);
-            user.setPassword(password);
+            user.setPassword(encodePassword);
             user.setEnabled(enabled != null ? 1 : 0);
             user.setRole(userRole);
             service.add(user);
@@ -64,7 +70,7 @@ public class UserController {
             user = service.getById(id);
             user.setUsername(username);
             if (!password.isBlank()) {
-                user.setPassword(password);
+                user.setPassword(encodePassword);
             }
             user.setEnabled(enabled != null ? 1 : 0);
             user.setRole(userRole);

@@ -29,7 +29,6 @@ public class NoteServiceTest {
 
     @Test
     public void testThatListNotNull() {
-        Note note = service.listAll().stream().findAny().orElse(null);
         Assertions.assertNotNull(service.listAll());
     }
 

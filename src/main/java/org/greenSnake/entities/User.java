@@ -1,11 +1,8 @@
 package org.greenSnake.entities;
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.greenSnake.dto.UserDto;
 import org.greenSnake.enums.UsersRoles;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
